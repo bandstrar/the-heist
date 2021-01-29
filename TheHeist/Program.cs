@@ -9,8 +9,8 @@ namespace TheHeist
         {
             Console.WriteLine("Plan your heist!");
 
+            var newBank = new Bank();
             int teamSkill = 0;
-            int bankDifficulty = 100;
             var teamMembers = new List<TeamMember>
             { };
             while (true)
@@ -36,21 +36,31 @@ namespace TheHeist
                 }
                 
             }
+
+            Console.WriteLine("Please enter how many trial runs you would like to perform.");
+            var trialRuns = int.Parse(Console.ReadLine());
             
-                       
-            Console.WriteLine($"There are {teamMembers.Count} members on your team.");
             foreach (var member in teamMembers)
             {
                 teamSkill += member.SkillLevel;
             }
 
-            if (teamSkill >= bankDifficulty)
+            for (var i = 0; i < trialRuns; i++)
             {
-                Console.WriteLine("The heist was a success! Enjoy your newfound wealth!");
-            }
-            else
-            {
-                Console.WriteLine("The heist was a failure! No movies starring George Clooney and Brad Pitt will be based on you.");
+                newBank.AssignLuck();
+                int bankDifficulty = newBank.Difficulty + newBank.LuckValue;
+
+                Console.WriteLine($"Your team's skill level is {teamSkill}. The bank's difficulty level is {bankDifficulty}");
+
+                if (teamSkill >= bankDifficulty)
+                {
+                    Console.WriteLine("The heist was a success! Enjoy your newfound wealth!");
+                }
+                else
+                {
+                    Console.WriteLine("The heist was a failure! No movies starring George Clooney and Brad Pitt will be based on you.");
+                }
+
             }
                   
         }
