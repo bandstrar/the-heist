@@ -6,9 +6,13 @@ namespace TheHeist
 {
     class Bank
     {
-        public int Difficulty { get; set; } = 100;
+        public int Difficulty { get; set; }
         public int LuckValue { get; set; }
 
+        public Bank(int difficulty)
+        {
+            Difficulty = difficulty;
+        }
 
         public void AssignLuck()
         {
